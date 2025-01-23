@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="io.goorm.mini.mapper.AdminMapper">
+
+    <!-- SELECT -->
+    <select id="selectAll" resultType="io.goorm.mini.domain.Admin">
+        SELECT * FROM ADMIN
+        ORDER BY admin_seq desc
+    </select>
+
+    <select id="selectById" parameterType="long" resultType="io.goorm.mini.domain.Admin">
+        SELECT * FROM ADMIN WHERE admin_seq = #{adminSeq}
+    </select>
+
+    <!-- INSERT -->
+    <insert id="insert" parameterType="io.goorm.mini.domain.Admin">
+        INSERT INTO ADMIN (admin_id,  admin_pw, admin_name, reg_seq)
+        VALUES (#{admin.adminId}, #{admin.adminPw}, #{admin.adminName}, #{admin.regSeq})
+    </insert>
+
+    <!-- UPDATE -->
+    <update id="update" parameterType="io.goorm.mini.domain.Admin">
+        UPDATE ADMIN
+        SET admin_name = #{admin.adminName}, admin_id = #{admin.adminId} , admin_pw = #{admin.adminPw}
+        WHERE admin_seq = #{admin.adminSeq}
+    </update>
+
+    <!-- UPDATE -->
+    <update id="updateUseYn" parameterType="io.goorm.mini.domain.Admin">
+        UPDATE VIDEOS
+        SET use_yn = #{admin.useYn}
+        WHERE admin_seq = #{admin.adminSeq}
+    </update>
+
+    <!-- DELETE -->
+    <delete id="delete" parameterType="long">
+        DELETE FROM ADMIN WHERE admin_seq = #{admin.videoSeq}
+    </delete>
+
+</mapper>

@@ -1,20 +1,22 @@
-package io.goorm.mini.vo;
+package io.goorm.mini.domain;
 
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter
 @Setter
+@Getter
 public class Video {
 
     private Long videoSeq;
-    private String video;
 
+    private String video;
     private String videoThumnail;
-    private String memberSeq;
-    private String regDate;
 
     private int publishYn;
     private String deleteYn;
+
+    private String memberSeq;
+    private String regDate;
+
 
 }

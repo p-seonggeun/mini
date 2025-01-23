@@ -5,53 +5,53 @@
 <mapper namespace="io.goorm.mini.mapper.VideoMapper">
 
     <!-- SELECT -->
-    <select id="selectIndex" resultType="io.goorm.mini.vo.Video">
+    <select id="selectIndex" resultType="io.goorm.mini.domain.Video">
         SELECT *
         FROM VIDEOS
-        WHERE publish_yn = 1
+        WHERE publish_yn = 1 AND delete_yn = 'N'
         ORDER BY video_seq desc
     </select>
 
     <!-- SELECT -->
-    <select id="selectAll" resultType="io.goorm.mini.vo.Video">
+    <select id="selectAll" resultType="io.goorm.mini.domain.Video">
         SELECT * FROM VIDEOS
         ORDER BY video_seq desc
     </select>
 
-    <select id="selectById" parameterType="long" resultType="io.goorm.mini.vo.Video">
+    <select id="selectById" parameterType="long" resultType="io.goorm.mini.domain.Video">
         SELECT * FROM VIDEOS WHERE video_seq = #{videoSeq}
     </select>
 
     <!-- INSERT -->
-    <insert id="insert" parameterType="io.goorm.mini.vo.Video">
-        INSERT INTO VIDEOS (video, video_thumnail, member_seq)
+    <insert id="insert" parameterType="io.goorm.mini.domain.Video">
+        INSERT INTO VIDEOS (video,  video_thumnail, member_seq)
         VALUES (#{video.video}, #{video.videoThumnail}, #{video.memberSeq})
     </insert>
 
     <!-- UPDATE -->
-    <update id="update" parameterType="map">
+    <update id="update" parameterType="io.goorm.mini.domain.Video">
         UPDATE VIDEOS
         SET video = #{video.video}, video_thumnail = #{video.videoThumnail}
-        WHERE video_seq = #{videoSeq}
+        WHERE video_seq = #{video.videoSeq}
     </update>
 
     <!-- UPDATE -->
-    <update id="updatePublish" parameterType="map">
+    <update id="updatePublishYn" parameterType="io.goorm.mini.domain.Video">
         UPDATE VIDEOS
         SET publish_yn = #{video.publishYn}
-        WHERE video_seq = #{videoSeq}
+        WHERE video_seq = #{video.videoSeq}
     </update>
 
     <!-- UPDATE -->
-    <update id="updateDelete" parameterType="map">
+    <update id="updateDeleteYn" parameterType="io.goorm.mini.domain.Video">
         UPDATE VIDEOS
         SET delete_yn = #{video.deleteYn}
-        WHERE video_seq = #{videoSeq}
+        WHERE video_seq = #{video.videoSeq}
     </update>
 
     <!-- DELETE -->
     <delete id="delete" parameterType="long">
-        DELETE FROM VIDEOS WHERE video_seq = #{videoSeq}
+        DELETE FROM VIDEOS WHERE video_seq = #{video.videoSeq}
     </delete>
 
 </mapper>

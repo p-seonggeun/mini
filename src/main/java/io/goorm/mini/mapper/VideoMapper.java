@@ -1,6 +1,6 @@
 package io.goorm.mini.mapper;
 
-import io.goorm.mini.vo.Video;
+import io.goorm.mini.domain.Video;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -13,16 +13,16 @@ public interface VideoMapper {
 
     List<Video> selectAll();
 
-    Video selectById(@Param("videoSeq") Long videoSeq);
+    Video selectById(@Param("videoSeq") Long seq);
 
     int insert(@Param("video") Video video);
 
-    int update(@Param("video") Video video, @Param("videoSeq") Long videoSeq);
+    int update(@Param("video") Video video);
 
-    int updatePublish(@Param("video") Video video, @Param("videoSeq") Long videoSeq);
+    int updatePublishYn(@Param("video") Video video);
 
-    int updateDelete(@Param("video") Video video, @Param("videoSeq") Long videoSeq);
+    int updateDeleteYn(@Param("video") Video video);
 
-    int delete(@Param("videoSeq") Long videoSeq);
+    int delete(@Param("videoSeq") Long seq);
 
 }

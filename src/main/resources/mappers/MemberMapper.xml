@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="io.goorm.mini.mapper.MemberMapper">
+    <!-- SELECT -->
+    <select id="selectAll" resultType="io.goorm.mini.domain.Member">
+        SELECT * FROM MEMBER
+        ORDER BY member_seq desc
+    </select>
+
+    <select id="selectById" parameterType="long" resultType="io.goorm.mini.domain.Member">
+        SELECT * FROM MEMBER WHERE member_seq = #{memberSeq}
+    </select>
+
+    <!-- INSERT -->
+    <insert id="insert" parameterType="io.goorm.mini.domain.Member">
+        INSERT INTO MEMBER (member_id, member_pw, member_nick, reg_seq)
+        VALUES (#{member.memberId}, #{member.memberPw}, #{member.memberNick}, #{member.regSeq})
+    </insert>
+
+    <!-- UPDATE -->
+    <update id="update" parameterType="io.goorm.mini.domain.Member">
+        UPDATE MEMBER
+        SET member_nick = #{member.memberNick}, member_id = #{member.memberId} , member_pw = #{member.memberPw}
+        WHERE member_seq = #{member.memberSeq}
+    </update>
+
+    <!-- UPDATE -->
+    <update id="updateUseYn" parameterType="io.goorm.mini.domain.Member">
+        UPDATE MEMBER
+        SET use_yn = #{member.useYn}
+        WHERE member_seq = #{admin.memberSeq}
+    </update>
+
+    <!-- DELETE -->
+    <delete id="delete" parameterType="long">
+        DELETE FROM MEMBER WHERE member_seq = #{memberSeq}
+    </delete>
+
+</mapper>
