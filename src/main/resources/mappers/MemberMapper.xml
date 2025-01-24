@@ -13,10 +13,20 @@
         SELECT * FROM MEMBER WHERE member_seq = #{memberSeq}
     </select>
 
+    <select id="selectByMemberId" parameterType="String"  resultType="io.goorm.mini.domain.Member">
+        SELECT * FROM MEMBER WHERE member_id = #{memberId}
+    </select>
+
+    <select id="existsById" resultType="boolean">
+        SELECT EXISTS (
+        SELECT 1 FROM MEMBER WHERE member_id = #{memberId}
+        )
+    </select>
+
     <!-- INSERT -->
     <insert id="insert" parameterType="io.goorm.mini.domain.Member">
-        INSERT INTO MEMBER (member_id, member_pw, member_nick, reg_seq)
-        VALUES (#{member.memberId}, #{member.memberPw}, #{member.memberNick}, #{member.regSeq})
+        INSERT INTO MEMBER (member_id, member_pw, member_nick)
+        VALUES (#{member.memberId}, #{member.memberPw}, #{member.memberNick})
     </insert>
 
     <!-- UPDATE -->

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title th:text="${title}">Default Title</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+
+<body class="min-h-screen bg-white dark:bg-zinc-900">
+<!-- Header -->
+<header class="fixed top-0 z-50 w-full bg-white dark:bg-zinc-900 border-b dark:border-zinc-700">
+  <div class="flex items-center justify-between h-14 px-4">
+    <div class="flex items-center gap-4">
+      <button class="p-2 hover:bg-gray-100 dark:hover:bg-zinc-800 rounded-full" aria-label="Open menu">
+        <svg class="h-6 w-6 dark:text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+      <div class="flex items-center gap-1">
+        <a href="/"><img src="https://www.youtube.com/s/desktop/7c155e84/img/favicon_144x144.png" alt="YouTube Logo" class="w-[90px] h-5"></a>
+      </div>
+    </div>
+
+    <div class="hidden md:flex items-center gap-4 flex-1 justify-center max-w-2xl">
+      <div class="flex flex-1 max-w-[600px]">
+        <div class="flex flex-1 items-center border dark:border-zinc-700 rounded-l-full px-4">
+          <input type="text" placeholder="Search" class="w-full bg-transparent border-none outline-none py-2 dark:text-white">
+        </div>
+        <button class="px-6 bg-gray-100 dark:bg-zinc-800 border border-l-0 dark:border-zinc-700 rounded-r-full hover:bg-gray-200 dark:hover:bg-zinc-700">
+          <svg class="h-5 w-5 dark:text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="flex items-center gap-2">
+      <button class="p-2 hover:bg-gray-100 dark:hover:bg-zinc-800 rounded-full md:hidden">
+        <svg class="h-6 w-6 dark:text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+        </svg>
+      </button>
+      <a th:if="${session.member != null}" th:href="@{/videos/create}" class="p-2 hover:bg-gray-100 dark:hover:bg-zinc-800 rounded-full">
+        <svg class="h-6 w-6 dark:text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+        </svg>
+      </a>
+      <a th:if="${session.member != null}" th:href="@{/logout}" class="p-2 hover:bg-gray-100 dark:hover:bg-zinc-800 rounded-full">
+        <svg class="h-6 w-6 dark:text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M10 17l5-5m0 0l-5-5m5 5H3m18 0a9 9 0 11-9-9 9 9 0 019 9z" />
+        </svg>
+      </a>
+      <span th:text="${session.member != null ? session.member.memberNick : ''}"></span>
+      <a th:href="${session.member != null ? '/profile' : '/login'}" class="p-2 hover:bg-gray-100 dark:hover:bg-zinc-800 rounded-full">
+        <svg th:classappend="${session.member != null ? 'text-blue-500' : 'dark:text-white'}" class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+        </svg>
+      </a>
+    </div>
+  </div>
+</header>
+
+<!-- Main Content -->
+<div class="flex pt-14">
+  <!-- Sidebar -->
+  <aside class="w-64 fixed left-0 top-14 bottom-0 overflow-y-auto hidden md:block p-2 dark:bg-zinc-900">
+    <nav class="flex flex-col gap-2">
+      <a href="/" class="flex items-center gap-4 p-2 hover:bg-gray-100 dark:hover:bg-zinc-800 rounded-lg dark:text-white">
+        <span class="text-xl">🏠</span> Home
+      </a>
+      <a href="#" class="flex items-center gap-4 p-2 hover:bg-gray-100 dark:hover:bg-zinc-800 rounded-lg dark:text-white">
+        <span class="text-xl">📱</span> Shorts
+      </a>
+      <a href="#" class="flex items-center gap-4 p-2 hover:bg-gray-100 dark:hover:bg-zinc-800 rounded-lg dark:text-white">
+        <span class="text-xl">📺</span> Subscriptions
+      </a>
+      <a href="#" class="flex items-center gap-4 p-2 hover:bg-gray-100 dark:hover:bg-zinc-800 rounded-lg dark:text-white">
+        <span class="text-xl">📚</span> Library
+      </a>
+      <a href="#" class="flex items-center gap-4 p-2 hover:bg-gray-100 dark:hover:bg-zinc-800 rounded-lg dark:text-white">
+        <span class="text-xl">⏰</span> History
+      </a>
+    </nav>
+  </aside>
+
+  <!-- Video Grid -->
+  <main class="flex-1 md:ml-64 p-4">
+    <div layout:fragment="content">
+      <p>Default Content</p>
+    </div>
+  </main>
+</div>
+</body>
+</html>

@@ -9,22 +9,18 @@ import java.io.IOException;
 import java.util.Properties;
 
 
-@Configuration
+//@Configuration
 public class JasyptConfig {
 
-    @Value("${jasypt.encryptor.location}")
-    private String filePath;
+    @Value("${jasypt.encryptor.keyholder}")
+    private String secretKey;
 
     @Bean("jasyptStringEncryptor")
     public StandardPBEStringEncryptor stringEncryptor() throws IOException {
 
         StandardPBEStringEncryptor encryptor = new StandardPBEStringEncryptor();
 
-        Properties properties = new Properties();
-        properties.load(new FileInputStream(filePath));
-
-        String encryptKey = properties.getProperty("encryption.key");
-        encryptor.setPassword(encryptKey);
+        encryptor.setPassword(secretKey);
         encryptor.setAlgorithm("PBEWithMD5AndDES");
 
         return encryptor;

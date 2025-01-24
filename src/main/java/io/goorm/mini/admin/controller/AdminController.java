@@ -2,6 +2,7 @@ package io.goorm.mini.admin.controller;
 
 import io.goorm.mini.mapper.AdminMapper;
 import io.goorm.mini.domain.Admin;
+import io.goorm.mini.service.AdminService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,7 +26,7 @@ public class AdminController {
     @GetMapping("/admins")
     public String list(Model model) {
 
-       // model.addAttribute("posts", adminSe.getBoards());
+        model.addAttribute("posts", adminMapper.selectAll());
 
         return "mgr/admin/list";
     }

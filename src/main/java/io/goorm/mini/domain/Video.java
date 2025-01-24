@@ -12,6 +12,11 @@ public class Video {
     private String video;
     private String videoThumnail;
 
+    private String title;
+    private String content;
+
+    private String channelName;
+
     private int publishYn;
     private String deleteYn;
 

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/home-layout}">
+
+<div layout:fragment="content" class="mt-8">
+    <script th:inline="javascript">
+        /* <![CDATA[ */
+        let message = [[${msg}]]; // Thymeleaf 변수를 JavaScript 변수에 할당
+        if (message) {
+            alert(message); // alert으로 메시지를 표시
+        }
+        /* ]]> */
+    </script>
+    <!-- login.html -->
+    <form method="post" action="/login" class="max-w-md mx-auto mt-10 bg-white p-8 rounded shadow">
+        <h2 class="text-2xl font-bold mb-6 text-center">로그인</h2>
+        <div class="mb-4">
+            <label for="memberId" class="block text-sm font-medium text-gray-700">아이디</label>
+            <input id="memberId" name="memberId" type="text" required class="mt-1 block w-full p-2.5 border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-500">
+        </div>
+        <div class="mb-6">
+            <label for="memberPw" class="block text-sm font-medium text-gray-700">비밀번호</label>
+            <input id="memberPw" name="memberPw" type="password" required class="mt-1 block w-full p-2.5 border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-500">
+        </div>
+        <div class="flex items-center justify-between">
+            <button type="submit" class="w-full py-2 px-4 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring focus:ring-blue-500" th:text="#{login.button}"></button>
+        </div>
+    </form>
+    <div class="max-w-md mx-auto mt-4 flex justify-between">
+        <a href="/join" class="text-sm text-blue-600 hover:underline">회원가입</a>
+        <a href="/findidpw" class="text-sm text-blue-600 hover:underline">비밀번호찾기</a>
+    </div>
+
+</div>
+
+</html>

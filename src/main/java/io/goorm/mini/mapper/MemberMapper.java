@@ -13,6 +13,10 @@ public interface MemberMapper {
 
     Member selectById(@Param("memberSeq") Long memberSeq);
 
+    Member selectByMemberId(@Param("memberId") String memberId);
+
+    boolean existsById(String memberId);
+
     int insert(@Param("member") Member member);
 
     int update(@Param("member") Member member);

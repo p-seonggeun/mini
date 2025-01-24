@@ -26,9 +26,18 @@ public class MemberService {
         return memberMapper.selectAll();
     }
 
+    public Member login(Member member) {
+
+        return memberMapper.selectByMemberId(member.getMemberId());
+    }
+
     public Member find(Long memberSeq) {
 
         return memberMapper.selectById(memberSeq);
+    }
+
+    public boolean existsById(String memberId) {
+        return memberMapper.existsById(memberId);
     }
 
     public int save(Member member) {

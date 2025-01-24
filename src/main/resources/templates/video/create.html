@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/home-layout}">
+
+<script th:inline="javascript">
+    /* <![CDATA[ */
+    let message = [[${msg}]]; // Thymeleaf 변수를 JavaScript 변수에 할당
+    if (message) {
+        alert(message); // alert으로 메시지를 표시
+    }
+    /* ]]> */
+</script>
+<div layout:fragment="content" class="mt-8">
+
+    <form method="post" action="/videos" enctype="multipart/form-data" class="max-w-md mx-auto mt-10 bg-white p-8 rounded shadow">
+        <input id="memberSeq" name="memberSeq" type="hidden" th:value="${session.member.memberSeq}"/>
+        <h1 class="text-xl font-bold mb-6 text-center" th:text="${msg}">Default Message</h1>
+        <h2 class="text-2xl font-bold mb-6 text-center">동영상등록</h2>
+        <div class="mb-4">
+            <label for="videoFile" class="block text-sm font-medium text-gray-700">동영상</label>
+            <input id="videoFile" name="videoFile" type="file" required class="mt-1 block w-full p-2.5 border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-500">
+        </div>
+        <div class="mb-4">
+            <label for="videoThumnailFile" class="block text-sm font-medium text-gray-700">썸네일</label>
+            <input id="videoThumnailFile" name="videoThumnailFile" type="file" required class="mt-1 block w-full p-2.5 border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-500">
+        </div>
+        <div class="mb-6">
+            <label for="title" class="block text-sm font-medium text-gray-700">제목</label>
+            <input id="title" name="title" type="text" required class="mt-1 block w-full p-2.5 border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-500">
+        </div>
+        <div class="mb-6">
+            <label for="content" class="block text-sm font-medium text-gray-700">설명</label>
+            <input id="content" name="content" type="text" required class="mt-1 block w-full p-2.5 border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-500">
+        </div>
+        <div class="flex items-center justify-between">
+            <button type="submit" class="w-full py-2 px-4 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring focus:ring-blue-500">회원가입</button>
+        </div>
+    </form>
+
+
+</div>
+
+</html>

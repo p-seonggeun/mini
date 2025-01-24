@@ -6,45 +6,45 @@
 
     <!-- SELECT -->
     <select id="selectIndex" resultType="io.goorm.mini.domain.Video">
-        SELECT *
-        FROM VIDEOS
-        WHERE publish_yn = 1 AND delete_yn = 'N'
+        SELECT a.*, b.member_nick as channelName
+        FROM VIDEO a, MEMBER b
+        WHERE publish_yn = 1 AND delete_yn = 'N' AND a.member_seq = b.member_seq
         ORDER BY video_seq desc
     </select>
 
     <!-- SELECT -->
     <select id="selectAll" resultType="io.goorm.mini.domain.Video">
-        SELECT * FROM VIDEOS
+        SELECT * FROM VIDEO
         ORDER BY video_seq desc
     </select>
 
     <select id="selectById" parameterType="long" resultType="io.goorm.mini.domain.Video">
-        SELECT * FROM VIDEOS WHERE video_seq = #{videoSeq}
+        SELECT * FROM VIDEO WHERE video_seq = #{videoSeq}
     </select>
 
     <!-- INSERT -->
     <insert id="insert" parameterType="io.goorm.mini.domain.Video">
-        INSERT INTO VIDEOS (video,  video_thumnail, member_seq)
-        VALUES (#{video.video}, #{video.videoThumnail}, #{video.memberSeq})
+        INSERT INTO VIDEO (video,  video_thumnail,title,content, member_seq)
+        VALUES (#{video.video}, #{video.videoThumnail}, #{video.title}, #{video.content}, #{video.memberSeq})
     </insert>
 
     <!-- UPDATE -->
     <update id="update" parameterType="io.goorm.mini.domain.Video">
-        UPDATE VIDEOS
-        SET video = #{video.video}, video_thumnail = #{video.videoThumnail}
+        UPDATE VIDEO
+        SET video = #{video.video}, video_thumnail = #{video.videoThumnail}, title = #{video.title}, content = #{video.content}
         WHERE video_seq = #{video.videoSeq}
     </update>
 
     <!-- UPDATE -->
     <update id="updatePublishYn" parameterType="io.goorm.mini.domain.Video">
-        UPDATE VIDEOS
+        UPDATE VIDEO
         SET publish_yn = #{video.publishYn}
         WHERE video_seq = #{video.videoSeq}
     </update>
 
     <!-- UPDATE -->
     <update id="updateDeleteYn" parameterType="io.goorm.mini.domain.Video">
-        UPDATE VIDEOS
+        UPDATE VIDEO
         SET delete_yn = #{video.deleteYn}
         WHERE video_seq = #{video.videoSeq}
     </update>
